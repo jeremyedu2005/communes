@@ -27,7 +27,6 @@ class VueDebutHTML
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?= htmlspecialchars($this->titre) ?></title>
-    <link rel="stylesheet" href="css/communes.css" />
 <?php foreach ($this->css as $fichier) { ?>
     <link rel="stylesheet" href="css/<?= htmlspecialchars($fichier) ?>" />
 <?php } ?>
