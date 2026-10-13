@@ -5,19 +5,20 @@
 class VueDebutHTML
 {
     private $titre;  // Titre de la page, différent pour chaque vue
+    private $css;    // Liste des fichiers CSS propres à la vue
 
-    // Le titre est donné par la vue qui utilise cette classe
-    public function __construct($titre = 'Les communes de France')
+    // La vue donne son titre et, si besoin, ses fichiers CSS
+    public function __construct($titre = 'Les communes de France', $css = [])
     {
         $this->titre = $titre;
+        $this->css = $css;
     }
 
     public function __toString()
     {
-        ob_start();  // Active la mise en mémoire tampon de sortie
+        ob_start();
 
-        // La déclaration XML est écrite avec echo, jamais en dur dans le gabarit :
-        // PHP pourrait prendre "<?xml" pour une balise PHP
+        // La déclaration XML est écrite avec echo : PHP pourrait prendre "<?xml" pour une balise PHP
         echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
         ?>
 <!DOCTYPE html>
@@ -26,7 +27,10 @@ class VueDebutHTML
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?= htmlspecialchars($this->titre) ?></title>
-    <link rel="stylesheet" href="css/accueil.css" />
+    <link rel="stylesheet" href="css/communes.css" />
+<?php foreach ($this->css as $fichier) { ?>
+    <link rel="stylesheet" href="css/<?= htmlspecialchars($fichier) ?>" />
+<?php } ?>
 </head>
 <body>
 <div class="page">
@@ -41,6 +45,6 @@ class VueDebutHTML
     </header>
     <main>
 <?php
-        return ob_get_clean();  // Renvoie le contenu du tampon et le vide
+        return ob_get_clean();
     }
 }

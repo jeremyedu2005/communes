@@ -43,7 +43,7 @@ class VueAccueil
         $contenu .= '        </section>' . "\n";
 
         // La page = début commun + contenu de cette vue + fin commune
-        $debut = new VueDebutHTML('Accueil - Les communes de France');
+        $debut = new VueDebutHTML('Accueil - Les communes de France', ['accueil.css']);
         $fin   = new VueFinHTML();
 
         return $debut . $contenu . $fin;
