@@ -89,7 +89,7 @@ class Communes
         return $this->data;
     }
 
-        // Retourne une tranche de la liste des communes (pour la pagination)
+    /*    // Retourne une tranche de la liste des communes (pour la pagination)
     // $page commence à 1 ; $parPage = nombre de communes par page
     public function getListeCommunesPage($page, $parPage)
     {
@@ -104,7 +104,67 @@ class Communes
     {
         // ceil arrondit au nombre entier supérieur (348,68 devient 349)
         return (int)ceil(count($this->data) / $parPage);
+    }*/
+
+    // Met un texte sous une forme comparable : minuscules, sans accents,
+    // tirets et apostrophes remplacés par des espaces ("Saint-Étienne" devient "saint etienne")
+    private function simplifier($texte)
+    {
+        $texte = mb_strtolower($texte, 'UTF-8');
+        $texte = strtr($texte, [
+            'à' => 'a', 'â' => 'a', 'ä' => 'a',
+            'é' => 'e', 'è' => 'e', 'ê' => 'e', 'ë' => 'e',
+            'î' => 'i', 'ï' => 'i',
+            'ô' => 'o', 'ö' => 'o',
+            'ù' => 'u', 'û' => 'u', 'ü' => 'u',
+            'ÿ' => 'y', 'ç' => 'c', 'œ' => 'oe', 'æ' => 'ae'
+        ]);
+        $texte = str_replace(['-', "'", '’'], ' ', $texte);
+
+        return trim($texte);
     }
+
+    // Retourne les communes dont le nom contient le texte recherché
+    // Sans recherche (texte vide), retourne toutes les communes
+    public function getListeCommunesRecherche($recherche)
+    {
+        $recherche = $this->simplifier($recherche);
+
+        if ($recherche === '') {
+            return $this->data;
+        }
+
+        // array_filter garde les communes dont le nom simplifié contient le texte
+        return array_values(array_filter($this->data, function ($c) use ($recherche) {
+            return strpos($this->simplifier($c['nom']), $recherche) !== false;
+        }));
+    }
+
+    // Retourne le nombre de communes qui correspondent à la recherche
+    public function getNombreCommunesRecherche($recherche)
+    {
+        return count($this->getListeCommunesRecherche($recherche));
+    }
+
+    // Retourne une tranche de la liste (pour la pagination), en tenant compte de la recherche
+    // $page commence à 1 ; $parPage = nombre de communes par page
+    public function getListeCommunesPage($page, $parPage, $recherche = '')
+    {
+        $page = max(1, (int)$page);
+        $liste = $this->getListeCommunesRecherche($recherche);
+
+        // array_slice(tableau, position de départ, longueur)
+        return array_slice($liste, ($page - 1) * $parPage, $parPage);
+    }
+
+    // Retourne le nombre de pages (au moins 1, même sans résultat)
+    public function getNombrePages($parPage, $recherche = '')
+    {
+        $nombre = count($this->getListeCommunesRecherche($recherche));
+
+        // ceil arrondit au nombre entier supérieur (348,68 devient 349)
+        return max(1, (int)ceil($nombre / $parPage));
+    }    
 
     // Retourne les communes d'un département, par exemple getListeCommuneDepartement("93")
     public function getListeCommuneDepartement($dep)
