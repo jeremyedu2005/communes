@@ -1,32 +1,5 @@
 /* css/accueil.css - Feuille de style commune à toutes les vues */
 
-.page {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
-    color: #222;
-    min-height: 100vh;
-    margin: -8px;          /* annule la marge par défaut du navigateur */
-}
-
-.entete {
-    background-color: #1f3a5f;
-    color: white;
-    padding: 20px;
-}
-
-.entete h1 {
-    margin: 0 0 10px 0;
-}
-
-.menu a {
-    color: white;
-    margin-right: 20px;
-    text-decoration: none;
-}
-
-.menu a:hover {
-    text-decoration: underline;
-}
 
 .cartes {
     display: flex;
@@ -51,8 +24,3 @@
     margin: 0 0 10px 0;
 }
 
-.pied {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-}

@@ -89,6 +89,23 @@ class Communes
         return $this->data;
     }
 
+        // Retourne une tranche de la liste des communes (pour la pagination)
+    // $page commence à 1 ; $parPage = nombre de communes par page
+    public function getListeCommunesPage($page, $parPage)
+    {
+        $page = max(1, (int)$page);
+
+        // array_slice(tableau, position de départ, longueur)
+        return array_slice($this->data, ($page - 1) * $parPage, $parPage);
+    }
+
+    // Retourne le nombre de pages nécessaires pour afficher toutes les communes
+    public function getNombrePages($parPage)
+    {
+        // ceil arrondit au nombre entier supérieur (348,68 devient 349)
+        return (int)ceil(count($this->data) / $parPage);
+    }
+
     // Retourne les communes d'un département, par exemple getListeCommuneDepartement("93")
     public function getListeCommuneDepartement($dep)
     {

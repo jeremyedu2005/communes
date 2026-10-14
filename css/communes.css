@@ -1,0 +1,41 @@
+/* Liste des communes */
+.liste {
+    padding: 20px;
+}
+
+.defilement {
+    overflow-x: auto;
+}
+
+.tableau {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+}
+
+.tableau th,
+.tableau td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tableau th {
+    background-color: #1f3a5f;
+    color: white;
+}
+
+.tableau tr:hover td {
+    background-color: #eef2f7;
+}
+
+.pagination {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pagination a {
+    color: #1f3a5f;
+}
