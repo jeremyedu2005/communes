@@ -34,7 +34,8 @@ switch ($action) {
 
     case "communes":
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;   // le contrôleur lit
-        $vue = new VueCommunes($modele, $page);                   // et donne le numéro à la vue    
+        $recherche = isset($_GET['recherche']) ? trim($_GET['recherche']) : '';
+        $vue = new VueCommunes($modele, $page, $recherche); // et donne le numéro à la vue    
         echo $vue;
         break;
 
