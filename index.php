@@ -16,21 +16,27 @@ require_once("inc/poo.inc.php");
 $modele = new Communes();
 
 // Router principal : "accueil" si aucune commande n'est donnée
-
+$action = 'accueil'; // Valeur par défaut, utilisée si l'URL ne contient pas ?cmd=
 if (isset($_GET['cmd']) && !empty($_GET['cmd'])) {
     $action = $_GET['cmd'];
 }
 
-$action = 'accueil'; // Valeur par défaut, utilisée si l'URL ne contient pas ?cmd=
+
 
 // Aiguillage des vues : chaque vue reçoit le modèle
 switch ($action) {
+
+// Les autres vues seront ajoutées ici (communes, departements, regions)
     case "accueil":
         $vue = new VueAccueil($modele);
         echo $vue;
         break;
 
-    // Les autres vues seront ajoutées ici (communes, departements, regions)
+    case "communes":
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;   // le contrôleur lit
+        $vue = new VueCommunes($modele, $page);                   // et donne le numéro à la vue    
+        echo $vue;
+        break;
 
     default:
         // Commande inconnue : on retombe sur l'accueil
@@ -38,3 +44,4 @@ switch ($action) {
         echo $vue;
         break;
 }
+        
