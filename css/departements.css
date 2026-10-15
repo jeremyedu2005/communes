@@ -1,0 +1,6 @@
+/* Liste des communes d'un département, répartie en colonnes */
+.colonnes {
+    columns: 220px;
+    list-style: none;
+    padding: 0;
+}

@@ -39,6 +39,13 @@ switch ($action) {
         echo $vue;
         break;
 
+    case "departements":
+        // Le contrôleur lit le code du département dans l'URL (vide = liste des départements)
+        $dep = isset($_GET['dep']) ? trim($_GET['dep']) : '';
+        $vue = new VueDepartements($modele, $dep);
+        echo $vue;
+        break;
+
     default:
         // Commande inconnue : on retombe sur l'accueil
         $vue = new VueAccueil($modele);
