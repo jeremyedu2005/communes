@@ -32,6 +32,19 @@ class VueDepartements
  
         return $debut . $contenu . $fin;
     }
+
+     // Fabrique le formulaire "code du département" (envoie ?cmd=departements&dep=93)
+    private function formulaireDepartement()
+    {
+        $h  = '            <form class="recherche" method="get" action="index.php">' . "\n";
+        $h .= '                <input type="hidden" name="cmd" value="departements" />' . "\n";
+        $h .= '                <label for="dep">Code du département :</label>' . "\n";
+        $h .= '                <input type="text" id="dep" name="dep" placeholder="Ex : 93" maxlength="3" />' . "\n";
+        $h .= '                <button type="submit">Afficher les communes</button>' . "\n";
+        $h .= '            </form>' . "\n";
+
+        return $h;
+    }
  
     // Contenu 1 : tous les départements avec leur nombre de communes
     private function listeDepartements()
@@ -42,6 +55,7 @@ class VueDepartements
  
         $h  = '        <section class="liste">' . "\n";
         $h .= '            <h2>Les départements</h2>' . "\n";
+        $h .= $this->formulaireDepartement();
         $h .= '            <p>' . count($departements) . ' départements. Le moins fourni : '
             . htmlspecialchars($min['nom']) . ' (' . $min['nombre'] . ' commune(s)).</p>' . "\n";
  
@@ -75,13 +89,14 @@ class VueDepartements
         return $h;
     }
  
-    // Contenu 2 : les communes d'un seul département
+    // Contenu 2 : les communes d'un seul département ()
     private function communesDuDepartement()
     {
         $communes = $this->modele->getListeCommuneDepartement($this->dep);
  
         $h  = '        <section class="liste">' . "\n";
         $h .= '            <p><a href="index.php?cmd=departements">← Retour à la liste des départements</a></p>' . "\n";
+        $h .= $this->formulaireDepartement();
  
         // Code inconnu (ou saisi à la main dans l'URL) : message au lieu d'une page vide
         if (count($communes) === 0) {

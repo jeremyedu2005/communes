@@ -78,7 +78,7 @@ class Communes
     // (dans le CSV, les codes sont écrits sans zéro initial)
     private function normaliserDep($code)
     {
-        return ltrim((string)$code, '0');
+        return strtoupper(ltrim((string)$code, '0'));
     }
 
     // ---------- Listes de communes ----------
