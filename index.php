@@ -46,6 +46,13 @@ switch ($action) {
         echo $vue;
         break;
 
+    case "regions":
+        // Le contrôleur lit le nom de la région dans l'URL (vide = liste des régions)
+        $region = isset($_GET['region']) ? trim($_GET['region']) : '';
+        $vue = new VueRegions($modele, $region);
+        echo $vue;
+        break;
+        
     default:
         // Commande inconnue : on retombe sur l'accueil
         $vue = new VueAccueil($modele);

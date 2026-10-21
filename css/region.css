@@ -1,0 +1,13 @@
+
+/* Blocs pliables des départements d'une région */
+details {
+    background-color: white;
+    border-radius: 6px;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+}
+
+summary {
+    cursor: pointer;
+    font-weight: bold;
+}
