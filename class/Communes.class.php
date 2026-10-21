@@ -263,6 +263,8 @@ class Communes
         return count($this->getListeCommuneDepartement($dep));
     }
 
+
+
     // Retourne le nombre de communes d'une région
     public function getNombreCommunesRegion($region)
     {
@@ -291,5 +293,27 @@ class Communes
             }
         }
         return $min;
+    }
+
+        // Retourne les départements d'une région, chacun avec la liste de ses communes :
+    // [['code' => '67', 'nom' => 'Bas-Rhin', 'communes' => ['Strasbourg', ...]], ...]
+    public function getDepartementsEtCommunesRegion($region)
+    {
+        $departements = [];
+        foreach ($this->data as $c) {
+            if ($c['reg_nom'] === $region) {
+                // Le préfixe 'd' évite que PHP transforme la clé "67" en entier
+                $cle = 'd' . $c['dep_code'];
+
+                // Première fois qu'on voit ce département : on crée son entrée
+                if (!isset($departements[$cle])) {
+                    $departements[$cle] = ['code' => $c['dep_code'], 'nom' => $c['dep_nom'], 'communes' => []];
+                }
+
+                // On ajoute le nom de la commune à la liste de son département
+                $departements[$cle]['communes'][] = $c['nom'];
+            }
+        }
+        return array_values($departements);
     }
 }
