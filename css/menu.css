@@ -1,4 +1,12 @@
-/* css/app.css - Style commun à toutes les pages */
+/* css/menu.css - Style commun à toutes les pages (en-tête, menu, pied de page) */
+
+/* La largeur d'un élément comprend son padding et sa bordure :
+   plus de débordement horizontal sur petit écran */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
 
 .page {
     font-family: Arial, sans-serif;
@@ -16,12 +24,21 @@
 
 .entete h1 {
     margin: 0 0 10px 0;
+    /* Taille du titre qui s'adapte à la largeur de l'écran (entre 1.4rem et 2.2rem) */
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+}
+
+/* Le menu passe à la ligne quand il n'y a plus de place */
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
 }
 
 .menu a {
     color: white;
-    margin-right: 20px;
     text-decoration: none;
+    padding: 6px 0;        /* zone de clic plus confortable au doigt */
 }
 
 .menu a:hover {
@@ -32,4 +49,15 @@
     text-align: center;
     padding: 20px;
     color: #666;
+}
+
+/* Petits écrans (téléphone) */
+@media (max-width: 600px) {
+    .entete {
+        padding: 15px;
+    }
+
+    .menu {
+        gap: 4px 16px;
+    }
 }
