@@ -1,6 +1,6 @@
 ## Les communes de France
  
-[Demo](https://raodson-jeremy.com/)
+[Demo](https://www.raodson-jeremy.com/Projets/communes/index.php)
  
 **Les communes de France** est une application web qui permet de consulter les communes françaises, leurs départements et leurs régions, à partir des données ouvertes publiées sur data.gouv.fr. Elle affiche des statistiques (nombre de communes en France, par département et par région) et propose une recherche par nom de commune.
  
