@@ -54,7 +54,7 @@ switch ($action) {
         break;
 
     case "mentions":
-        $vue = new VueMentionlegales();
+        $vue = new VueMention();
         echo $vue;
         break;
         
