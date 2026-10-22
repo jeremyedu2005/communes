@@ -2,7 +2,7 @@
 // Fichier : class/VueMentionlegales.class.php
 // Vue des mentions légales : elle fabrique son contenu, puis l'entoure du début et de la fin communs
 
-class VueMentionlegales
+class VueMention
 {
     public function __toString()
     {
