@@ -52,6 +52,11 @@ switch ($action) {
         $vue = new VueRegions($modele, $region);
         echo $vue;
         break;
+
+    case "mentions":
+        $vue = new VueMentionlegales();
+        echo $vue;
+        break;
         
     default:
         // Commande inconnue : on retombe sur l'accueil
