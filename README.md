@@ -67,7 +67,7 @@ communes/
 │   ├── VueCommunes.class.php      Liste des communes, recherche et pagination
 │   ├── VueDepartements.class.php  Départements et leurs communes
 │   ├── VueRegions.class.php       Régions, départements et communes
-│   └── VueMentionlegales.class.php  Mentions légales
+│   └── VueMention.class.php  Mentions légales
 └── css/
     ├── menu.css                   Style commun (en-tête, menu, pied de page)
     ├── accueil.css                Cartes de la page d'accueil
