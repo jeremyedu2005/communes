@@ -22,13 +22,47 @@
     padding: 20px;
 }
 
+/* Ligne du haut : le titre à gauche, le bouton hamburger à droite */
+.entete-haut {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
 .entete h1 {
-    margin: 0 0 10px 0;
+    margin: 0;
     /* Taille du titre qui s'adapte à la largeur de l'écran (entre 1.4rem et 2.2rem) */
     font-size: clamp(1.4rem, 5vw, 2.2rem);
 }
 
-/* Le menu passe à la ligne quand il n'y a plus de place */
+/* Case à cocher invisible : c'est elle qui retient si le menu est ouvert ou fermé (sans JavaScript) */
+.menu-toggle {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Bouton hamburger (un label lié à la case à cocher) : caché sur grand écran */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.hamburger span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    margin: 5px 0;
+    background-color: white;
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+/* Menu : sur grand écran, les liens sont côte à côte et passent à la ligne si besoin */
 .menu {
     display: flex;
     flex-wrap: wrap;
@@ -51,13 +85,56 @@
     color: #666;
 }
 
+/* Tablette et téléphone (1080 px et moins) : le menu devient un hamburger */
+@media (max-width: 1080px) {
+    .hamburger {
+        display: block;
+    }
+
+    .entete-haut {
+        margin-bottom: 0;
+    }
+
+    /* Menu fermé par défaut, liens les uns sous les autres */
+    .menu {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        margin-top: 10px;
+    }
+
+    .menu a {
+        padding: 12px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    /* Case cochée (clic sur le hamburger) : le menu s'affiche */
+    .menu-toggle:checked ~ .menu {
+        display: flex;
+    }
+
+    /* Le hamburger se transforme en croix quand le menu est ouvert */
+    .menu-toggle:checked ~ .entete-haut .hamburger span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle:checked ~ .entete-haut .hamburger span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle:checked ~ .entete-haut .hamburger span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    /* Contour visible quand on navigue au clavier */
+    .menu-toggle:focus-visible ~ .entete-haut .hamburger {
+        outline: 2px solid white;
+    }
+}
+
 /* Petits écrans (téléphone) */
 @media (max-width: 600px) {
     .entete {
         padding: 15px;
-    }
-
-    .menu {
-        gap: 4px 16px;
     }
 }

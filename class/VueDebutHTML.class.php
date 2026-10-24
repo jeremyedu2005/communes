@@ -35,7 +35,15 @@ class VueDebutHTML
 <body>
 <div class="page">
     <header class="entete">
-        <h1>Les communes de France</h1>
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+        <div class="entete-haut">
+            <h1>Les communes de France</h1>
+            <label for="menu-toggle" class="hamburger" aria-label="Ouvrir ou fermer le menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+        </div>
         <nav class="menu">
             <a href="index.php?cmd=accueil">Accueil</a>
             <a href="index.php?cmd=communes">Toutes les communes</a>
